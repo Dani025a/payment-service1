@@ -1,0 +1,24 @@
+datasource db {  
+    provider = "mongodb"
+    url = env("PAYMENT_DATABASE_URL")
+} 
+generator client {  
+    provider = "prisma-client-js"
+} 
+
+model Payment {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  orderId         String
+  stripeSessionId String   @unique
+  amount         Int
+  currency       String
+  status         PaymentStatus
+  metadata       Json
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+enum PaymentStatus {
+  success
+  failure
+}
