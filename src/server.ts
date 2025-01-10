@@ -11,7 +11,7 @@ const smee = new SmeeClient({
 
 const events = smee.start();
 
-const PORT = process.env.PORT || 1006;
+const PORT = process.env.PAYMENT_POR || 1006;
 
 app.listen(PORT, () => console.log(`Payment Service running on port ${PORT}`));
 
