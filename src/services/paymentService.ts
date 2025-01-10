@@ -46,7 +46,7 @@ export async function handlePaymentWebhook(event: Stripe.Event) {
     console.log('[handlePaymentWebhook] Received event:', event.type);
     const paymentPublisher = await PaymentPublisher.getInstance();
 
-    if (event.type === 'checkout.session.completed') {
+    if (event.type === 'checkout.session.completed' || event.type === 'charge.succeeded') {
       const session = event.data.object as Stripe.Checkout.Session;
 
       await prisma.payment.create({
